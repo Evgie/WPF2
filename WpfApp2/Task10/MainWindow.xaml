@@ -1,0 +1,33 @@
+﻿<Window x:Class="Task10.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task10"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Grid>
+        <StackPanel Orientation = "Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="10">
+            <GroupBox>
+                <GroupBox.Header>
+                    <Button Background="Lavender" FontSize="20" Padding="5">Select a color</Button>
+                </GroupBox.Header>
+                <StackPanel>
+                    <RadioButton Margin="3" IsChecked="True" Content="Red" Foreground="Red"/>
+                    <RadioButton Margin="3" Content="Orange" Foreground="Orange"/>
+                    <RadioButton Margin="3" Content="Green" Foreground="Green"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox>
+                <GroupBox.Header>
+                    <Button Background="Lavender" FontSize="20" Padding="5">Select a text style</Button>
+                </GroupBox.Header>
+                <StackPanel>
+                    <RadioButton Margin="3" Content="Regular" />
+                    <RadioButton Margin="3" IsChecked="True" Content="Bold" FontWeight="Bold"/>
+                    <RadioButton Margin="3" Content="Italic" Foreground="Green" FontStyle="Italic"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
