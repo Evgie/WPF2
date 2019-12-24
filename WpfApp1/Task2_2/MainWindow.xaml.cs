@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Task2_1
+namespace Task2_2
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,9 +23,6 @@ namespace Task2_1
         public MainWindow()
         {
             InitializeComponent();
-
-            Student student = new Student { FirstName = "Vasya", LastName = "Pupkin" };
-            this.DataContext = student;
         }
     }
 }
