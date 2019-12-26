@@ -3,10 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Task2_3"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.Resources>
+            <s:String x:Key="FirstName">Vasya</s:String>
+            <s:String x:Key="LastName">Pupkin</s:String>
+            <s:Boolean x:Key="IsMaster">true</s:Boolean>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Margin="20" Padding="20" Content="First Name" FontSize="30" MinWidth="300"/>
+            <TextBox Margin="20" Padding="20" FontSize="30" MinWidth="300" Text="{Binding Source={StaticResource FirstName}, Mode=OneWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Margin="20" Padding="20" Content="Last Name" FontSize="30" MinWidth="300"/>
+            <TextBox Margin="20" Padding="20" FontSize="30" MinWidth="300" Text="{Binding Source={StaticResource LastName}, Mode=OneWay}"/>
+        </StackPanel>
+        <CheckBox Grid.Row="2" VerticalAlignment="Bottom" FontSize="30" Margin="10" IsChecked="{Binding Source={StaticResource IsMaster}, Mode=OneWay}">
+            Master degree
+        </CheckBox>
     </Grid>
 </Window>

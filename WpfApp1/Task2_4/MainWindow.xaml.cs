@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Task2_1
+namespace Task2_4
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,8 +24,12 @@ namespace Task2_1
         {
             InitializeComponent();
 
-            Student student = new Student { FirstName = "Vasya", LastName = "Pupkin", IsMaster = true };
-            this.DataContext = student;
+            string FirstName = "Vasya";
+            string LastName = "Pupkin";
+            bool IsMaster = true;
+            this.textBox1.DataContext = FirstName;
+            this.textBox2.DataContext = LastName;
+            this.checkBox.DataContext = IsMaster;
         }
     }
 }

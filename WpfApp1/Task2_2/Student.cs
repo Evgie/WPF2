@@ -11,5 +11,7 @@ namespace Task2_2
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public bool IsMaster { get; set; }
     }
 }

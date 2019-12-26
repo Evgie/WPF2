@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Resources>
-            <local:Student x:Key="student" FirstName="Petya" LastName="Ivanov"></local:Student>
+            <local:Student x:Key="student" FirstName="Petya" LastName="Ivanov" IsMaster="True"></local:Student>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,7 +23,7 @@
             <Label Margin="20" Padding="20" Content="Last Name" FontSize="30" MinWidth="300"/>
             <TextBox Margin="20" Padding="20" FontSize="30" MinWidth="300" Text="{Binding LastName}"/>
         </StackPanel>
-        <CheckBox Grid.Row="2" VerticalAlignment="Bottom" FontSize="30" Margin="10" >
+        <CheckBox Grid.Row="2" VerticalAlignment="Bottom" FontSize="30" Margin="10" IsChecked="{Binding Source={StaticResource student}, Path=IsMaster}">
             Master degree
         </CheckBox>
     </Grid>
