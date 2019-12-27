@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Border Height="50" Width="300" BorderBrush="Gray" BorderThickness="1">
+            <StackPanel Background="LightGray" Orientation="Horizontal" ButtonBase.Click="StackPanel_Click">
+                <Button x:Name="YesButton" Width="Auto">Yes</Button>
+                <Button x:Name="NoButton" Width="Auto">No</Button>
+                <Button x:Name="CancelButton" Width="Auto">Cancel</Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

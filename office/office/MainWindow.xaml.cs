@@ -24,5 +24,23 @@ namespace office
         {
             InitializeComponent();
         }
+
+        private void StackPanel_Click(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement feSource = e.Source as FrameworkElement;
+            switch(feSource.Name)
+            {
+                case "YesButton":
+                    MessageBox.Show("Button Yes");
+                    break;
+                case "NoButton":
+                    MessageBox.Show("Button No");
+                    break;
+                case "CancelButton":
+                    MessageBox.Show("Button Cancel");
+                    break;
+            }
+            e.Handled = true;
+        }
     }
 }
