@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:office"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Border Height="50" Width="300" BorderBrush="Gray" BorderThickness="1">
-            <StackPanel Background="LightGray" Orientation="Horizontal" ButtonBase.Click="StackPanel_Click">
-                <Button x:Name="YesButton" Width="Auto">Yes</Button>
-                <Button x:Name="NoButton" Width="Auto">No</Button>
-                <Button x:Name="CancelButton" Width="Auto">Cancel</Button>
-            </StackPanel>
-        </Border>
+    <Grid Name="myGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="menuSelector" Grid.Column="0" VerticalAlignment="Center" >
+            <RadioButton GroupName="menu" Content="Салат оливье"/>
+            <RadioButton GroupName="menu" Content="Котлета по-киевски"/>
+            <RadioButton GroupName="menu" Content="Пицца с овощами"/>
+            <RadioButton GroupName="menu" Content="Мясной рулет"/>
+        </StackPanel>
+        <TextBlock x:Name="textBlock1" Grid.Column="1" Padding="10"/>
     </Grid>
 </Window>

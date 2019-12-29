@@ -23,24 +23,13 @@ namespace office
         public MainWindow()
         {
             InitializeComponent();
-        }
+            menuSelector.AddHandler(RadioButton.CheckedEvent, new RoutedEventHandler(menuSelector_Checked));
+        }            
 
-        private void StackPanel_Click(object sender, RoutedEventArgs e)
+        private void menuSelector_Checked(object sender, RoutedEventArgs e)
         {
-            FrameworkElement feSource = e.Source as FrameworkElement;
-            switch(feSource.Name)
-            {
-                case "YesButton":
-                    MessageBox.Show("Button Yes");
-                    break;
-                case "NoButton":
-                    MessageBox.Show("Button No");
-                    break;
-                case "CancelButton":
-                    MessageBox.Show("Button Cancel");
-                    break;
-            }
-            e.Handled = true;
+            RadioButton selectedRadio = (RadioButton)e.Source;
+            textBlock1.Text = "Вы выбрали: " + selectedRadio.Content.ToString();
         }
     }
 }
