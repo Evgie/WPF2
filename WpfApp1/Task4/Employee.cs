@@ -14,7 +14,7 @@ namespace Task4
 
         public string Department { get; set; }
 
-        public DateTime HireDate { get; set; }
+        public string HireDate { get; set; }
 
         public bool IsManager { get; set; }
     }

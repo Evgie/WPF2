@@ -9,14 +9,31 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-        <DataGrid Width="Auto" Name="dataGridEmployee" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Width="Auto" Name="dataGridEmployee" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Department" Binding="{Binding Department}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Content="Name" FontSize="20" FontWeight="DemiBold" Margin="5"/>
+        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Content="Hired date" FontSize="20" FontWeight="DemiBold" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Content="Department" FontSize="20" FontWeight="DemiBold" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="50,5,5,5">
+            <CheckBox Height="25" VerticalAlignment="Center" IsChecked="{Binding ElementName=dataGridEmployee, Path=SelectedItem.IsManager}"/>
+            <Label VerticalAlignment="Center" Content="is manager" FontSize="20" FontWeight="DemiBold" Margin="5"/>            
+        </StackPanel>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" Padding="5" FontSize="15" Text="{Binding ElementName=dataGridEmployee, Path=SelectedItem.Name}" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5,10,5,10" Padding="5" FontSize="15" Text="{Binding ElementName=dataGridEmployee, Path=SelectedItem.HireDate}" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Margin="5,10,5,10" Padding="5" FontSize="15" Text="{Binding ElementName=dataGridEmployee, Path=SelectedItem.Department}" VerticalAlignment="Center"/>
     </Grid>
 </Window>

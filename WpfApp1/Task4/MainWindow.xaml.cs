@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,11 @@ namespace Task4
         {
             InitializeComponent();
 
-            List<Employee> employee = new List<Employee>
+            ObservableCollection<Employee> employee = new ObservableCollection<Employee>
             {
-                new Employee {Id = 1, Name = "Vasya", Department = "Sales", HireDate = new DateTime(2019, 1, 1), IsManager = true },
-                new Employee {Id = 2, Name = "Petya", Department = "Sales", HireDate = new DateTime(2018, 1, 1), IsManager = false},
-                new Employee {Id = 3, Name = "Ivan", Department = "Sales", HireDate = new DateTime(2017, 1, 1), IsManager = false}
+                new Employee {Id = 1, Name = "Vasya Pupkin", Department = "Sales", HireDate = (new DateTime(2019, 1, 1)).ToString("d"), IsManager = true },
+                new Employee {Id = 2, Name = "Petya Ivanov", Department = "Sales", HireDate = (new DateTime(2018, 1, 1)).ToString("d"), IsManager = false},
+                new Employee {Id = 3, Name = "Ivan Petrov", Department = "Sales", HireDate = (new DateTime(2017, 1, 1)).ToString("d"), IsManager = false}
             };
             this.DataContext = employee;
         }
