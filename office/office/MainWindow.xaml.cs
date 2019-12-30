@@ -23,13 +23,26 @@ namespace office
         public MainWindow()
         {
             InitializeComponent();
-            menuSelector.AddHandler(RadioButton.CheckedEvent, new RoutedEventHandler(menuSelector_Checked));
-        }            
 
-        private void menuSelector_Checked(object sender, RoutedEventArgs e)
+            CommandBinding commandBinding = new CommandBinding();
+            //commandBinding.Command = ApplicationCommands.Help;
+            //commandBinding.Executed += CommandBinding_Executed;
+            //helpButton.CommandBindings.Add(commandBinding);
+        }  
+
+     private void Exit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            RadioButton selectedRadio = (RadioButton)e.Source;
-            textBlock1.Text = "Вы выбрали: " + selectedRadio.Content.ToString();
+            using (System.IO.StreamWriter )
         }
+    }
+
+    public class WindowCommands
+    {
+        static WindowCommands()
+        {
+            Exit = new RoutedCommand("Exit", typeof(MainWindow));
+        }
+
+        public static RoutedCommand Exit { get; set; }
     }
 }

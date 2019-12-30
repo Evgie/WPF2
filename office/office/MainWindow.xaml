@@ -6,17 +6,14 @@
         xmlns:local="clr-namespace:office"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Name="myGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel x:Name="menuSelector" Grid.Column="0" VerticalAlignment="Center" >
-            <RadioButton GroupName="menu" Content="Салат оливье"/>
-            <RadioButton GroupName="menu" Content="Котлета по-киевски"/>
-            <RadioButton GroupName="menu" Content="Пицца с овощами"/>
-            <RadioButton GroupName="menu" Content="Мясной рулет"/>
-        </StackPanel>
-        <TextBlock x:Name="textBlock1" Grid.Column="1" Padding="10"/>
+    <Window.CommandBindings>
+        <CommandBinding Command="local:WindowCommands.Exit"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Menu VerticalAlignment="Top" MinHeight="25">
+            <MenuItem Header="Выход" Command="local:WindowsCommands.Exit"/>
+        </Menu>
+        <Button x:Name="Button1" Width="80" Height="30" Content="Выход"
+                Command="local:WindowsCommands.Exit"/>
     </Grid>
 </Window>
