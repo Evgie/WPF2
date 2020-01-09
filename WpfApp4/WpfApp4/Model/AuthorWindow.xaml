@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp4.Tools"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AuthorWindow" Height="540" Width="460">
     <Window.CommandBindings>
@@ -46,7 +47,7 @@
         <!--BirthDate-->
         <Label Grid.Column="0" Grid.Row="3" FontSize="15" Content="Birth date" Margin="5,10,5,10"/>
         <DatePicker x:Name="newDateOfBirth" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,10,5,10"
-                   SelectedDate="{Binding BirthDate}" SelectedDateFormat="Short" />
+                   SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short" />
         <!--Country-->
         <Label Grid.Column="0" Grid.Row="4" FontSize="15" Content="Country" Margin="5,10,5,10"/>
         <ComboBox x:Name="newCountry" Grid.Column="1" Grid.Row="4" FontSize="15" Margin="5,10,5,10"

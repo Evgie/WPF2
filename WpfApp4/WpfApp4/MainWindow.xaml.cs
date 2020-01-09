@@ -53,22 +53,25 @@ namespace WpfApp4
             //
             //AuthorWindow
             //
-            //Author author = new Author();
-            //var authorWindow = new AuthorWindow() { DataContext = author};
-            //authorWindow.Owner = this;
-            //authorWindow.newLanguage.ItemsSource = Languages.languagesList;
-            //authorWindow.newCountry.ItemsSource = Countries.countriesList;
-            //authorWindow.ShowDialog();                       
-            //author.AddNewAuthor(this.authors, authorWindow);
+            Author author = new Author();
+            var authorWindow = new AuthorWindow() { DataContext = author };
+            authorWindow.Owner = this;
+            authorWindow.newLanguage.ItemsSource = Languages.languagesList;
+            authorWindow.newCountry.ItemsSource = Countries.countriesList;
+            authorWindow.ShowDialog();
+            author.AddNewAuthor(this.authors, authorWindow);
 
             //
             //BookWindow
             //
-            Book book = new Book();
-            BookWindow bookWindow = new BookWindow() { DataContext = book};
-            bookWindow.Owner = this;
-            bookWindow.ShowDialog();
-            this.authorList
+            //Author author = new Author();
+            //author = (Author)this.authorList.SelectedItem;
+            //var authorWindow = new AuthorWindow() { DataContext = this.authorList.SelectedItem };
+            //Book book = new Book();
+            //BookWindow bookWindow = new BookWindow() { DataContext = book};
+            //bookWindow.Owner = this;
+            //bookWindow.ShowDialog();
+            //book.AddNewBook(author.Books, bookWindow);
 
             //bookWindow.DataContext = this.booksDataGrid.SelectedItem;
             //FrameworkElement feSource = e.Source as FrameworkElement;
@@ -118,6 +121,7 @@ namespace WpfApp4
             //BookChange
             //
             var bookWindow = new BookWindow() { DataContext = this.booksDataGrid.SelectedItem };
+            
         }
 
         private void ChangeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
