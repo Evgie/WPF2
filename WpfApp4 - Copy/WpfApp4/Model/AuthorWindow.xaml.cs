@@ -25,6 +25,13 @@ namespace WpfApp4.Model
             
         }
 
+
+
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         private void OkCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.DialogResult = true;
@@ -34,16 +41,6 @@ namespace WpfApp4.Model
         {
             if (this.newFirstName.Text != "" && this.newLastName.Text != "" && this.newDateOfBirth.Text != "" && this.newCountry.Text != "" && this.newLanguage.Text != "" && this.newPlaceOfBirth.Text != "")
                 e.CanExecute = true;
-        }
-
-        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.DialogResult = false;
-        }
-
-        private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
     }
 }

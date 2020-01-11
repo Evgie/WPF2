@@ -45,52 +45,72 @@ namespace WpfApp4
                     }
                 }
             };
-            this.DataContext = authors;            
+            this.DataContext = authors;
         }
-                
+
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //
-            //AuthorWindow
-            //
+            FrameworkElement feSource = e.Source as FrameworkElement;
+            switch (feSource.Name)
+            {
+                case "btnNewAuthor":    // Add NewAuthor.
+                    AddAuthor();
+                    break;
+                case "btnBookNew":  // Add NewBook.
+                    AddBook();
+                    break;
+            }
+        }
+
+        private void AddBook()
+        {
+            Book book = new Book();
+            BookWindow bookWindow = new BookWindow() { DataContext = book };
+            bookWindow.Owner = this;
+            bookWindow.ShowDialog();
+
+            if (!bookWindow.DialogResult.Value)
+                return;
+            else
+            {
+                
+                Author author = new Author();
+                author = (Author)this.authorList.SelectedItem;
+                author.AddNewBook(this.authors[this.authorList.SelectedIndex].Books, bookWindow);
+            }
+        }
+
+        private void AddAuthor()
+        {
             Author author = new Author();
             var authorWindow = new AuthorWindow() { DataContext = author };
-            authorWindow.Owner = this;
             authorWindow.newLanguage.ItemsSource = Languages.languagesList;
             authorWindow.newCountry.ItemsSource = Countries.countriesList;
             authorWindow.ShowDialog();
-            author.AddNewAuthor(this.authors, authorWindow);
 
-            //
-            //BookWindow
-            //
-            //Author author = new Author();
-            //author = (Author)this.authorList.SelectedItem;
-            //var authorWindow = new AuthorWindow() { DataContext = this.authorList.SelectedItem };
-            //Book book = new Book();
-            //BookWindow bookWindow = new BookWindow() { DataContext = book};
-            //bookWindow.Owner = this;
-            //bookWindow.ShowDialog();
-            //book.AddNewBook(author.Books, bookWindow);
-
-            //bookWindow.DataContext = this.booksDataGrid.SelectedItem;
-            //FrameworkElement feSource = e.Source as FrameworkElement;
-            //switch(feSource.Name)
-            //{
-            //    case "btnNewAuthor":
-            //        authorWindow.Show();
-            //        break;
-            //    case "btnBookNew":
-            //        bookWindow.Show();
-            //        break;
-            //}
+            if (!authorWindow.DialogResult.Value)
+                return;
+            else
+                author.AddNewAuthor(this.authors, authorWindow);
         }
-
-        
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            FrameworkElement feSource = e.Source as FrameworkElement;
+            switch (feSource.Name)
+            {
+                case "btnNewAuthor":    
+                    e.CanExecute = true; 
+                    break;
+                case "btnBookNew":
+                    if (this.authorList.SelectedItem is null)
+                    {
+                        e.CanExecute = false;
+                        return;
+                    }
+                    e.CanExecute = true;
+                    break;
+            }            
         }
 
         private void DeleteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -105,34 +125,73 @@ namespace WpfApp4
 
         private void ChangeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //
-            //AuthorChange
-            //
-            //Author author = new Author();
-            //var authorWindow = new AuthorWindow() { DataContext = this.authorList.SelectedItem };
-            //authorWindow.newLanguage.ItemsSource = Languages.languagesList;
-            //authorWindow.newCountry.ItemsSource = Countries.countriesList;
-            //authorWindow.Owner = this;            
-            //authorWindow.ShowDialog();
-
-            //author.EditAuthor(authorWindow);
+            FrameworkElement feSource = e.Source as FrameworkElement;
+            switch (feSource.Name)
+            {
+                case "btnChangeAuthor":    // Change Author.
+                    ChangeAuthor();
+                    break;
+                case "btnBookChange":   // Change Book.
+                    ChangeBook();   
+                    break;
+            }
 
             //
             //BookChange
             //
-            var bookWindow = new BookWindow() { DataContext = this.booksDataGrid.SelectedItem };
-            
+            //var bookWindow = new BookWindow() { DataContext = this.booksDataGrid.SelectedItem };
+        }
+
+        private void ChangeAuthor()
+        {
+            Author author = new Author();
+            Author initialAuthor = new Author();
+            var authorWindow = new AuthorWindow() { DataContext = this.authorList.SelectedItem };
+            author = (Author)this.authorList.SelectedItem;
+            initialAuthor = (Author)author.Clone();
+            authorWindow.newLanguage.ItemsSource = Languages.languagesList;
+            authorWindow.newCountry.ItemsSource = Countries.countriesList;
+            authorWindow.ShowDialog();
+
+            if (authorWindow.DialogResult.Value)
+            {
+                this.authorList.Items.Refresh();
+            }
+            else
+            {
+                this.authors[this.authorList.SelectedIndex] = initialAuthor;
+                this.authorList.Items.Refresh();
+                return;
+            }
+        }
+
+        private void ChangeBook()
+        {
+
         }
 
         private void ChangeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if(this.authorList.SelectedItem is null)
+            FrameworkElement feSource = e.Source as FrameworkElement;
+            switch (feSource.Name)
             {
-                e.CanExecute = false;
-                return;
+                case "btnChangeAuthor":
+                    if (this.authorList.SelectedItem is null)
+                    {
+                        e.CanExecute = false;
+                        return;
+                    }
+                    e.CanExecute = true;
+                    break;
+                case "btnBookChange":
+                    if (this.booksDataGrid.SelectedItem is null)
+                    {
+                        e.CanExecute = false;
+                        return;
+                    }
+                    e.CanExecute = true;
+                    break;
             }
-
-            e.CanExecute = true;
         }
     }
 }

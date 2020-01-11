@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp4.Model
 {
-    public class Author : EntityBase, ICloneable
+    public class Author : EntityBase
     {
         public string FirstName { get; set; }
 
@@ -22,22 +22,6 @@ namespace WpfApp4.Model
         public string PlaceOfBirth { get; set; }
 
         public ObservableCollection<Book> Books { get; set; }
-
-        public object Clone()
-        {
-            return new Author
-            {
-                FirstName = this.FirstName,
-                LastName = this.LastName,
-                BirthDate = this.BirthDate,
-                Country = this.Country,
-                Language = this.Language,
-                PlaceOfBirth = this.PlaceOfBirth,
-                Books = this.Books,
-                Id = this.Id,
-                IsNew = this.IsNew
-            };
-        }
 
         public override string ToString()
         {
@@ -62,20 +46,6 @@ namespace WpfApp4.Model
             this.Country = (string)authorWindow.newCountry.SelectedValue;
             this.Language = (string)authorWindow.newLanguage.SelectedValue;
             this.PlaceOfBirth = authorWindow.newPlaceOfBirth.Text;
-        }
-
-        public void AddNewBook(ObservableCollection<Book> Books, BookWindow bookWindow)
-        {
-            Book book = new Book();
-            book.EditBook(bookWindow);
-                
-                
-                
-
-            if (book.Title != "" && book.Cost != 0 && book.Date != null)
-               
-                Books.Add(book);
-            book.Save();
         }
     }
 }

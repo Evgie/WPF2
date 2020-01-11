@@ -46,7 +46,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--Menu-->
+
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="15" Margin="3">
             <MenuItem>
                 <MenuItem.Header>File</MenuItem.Header>
@@ -79,7 +79,7 @@
 
         <!--Book Buttons-->
         <Button x:Name="btnBookNew" Grid.Column="6" Grid.Row="4" Margin="2" Content="New" Command="New"/>
-        <Button x:Name="btnBookChange" Grid.Column="7" Grid.Row="4" Margin="2" Content="Change" Command="localTools:MyCommands.Change"/>
+        <Button x:Name="btnBookChange" Grid.Column="7" Grid.Row="4" Margin="2" Content="Change"/>
         <Button x:Name="btnBookDelete" Grid.Column="8" Grid.Row="4" Margin="2" Content="Delete"/>
 
         <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="12">

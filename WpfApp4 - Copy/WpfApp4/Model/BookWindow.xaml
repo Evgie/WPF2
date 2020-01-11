@@ -3,18 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp4.Tools"
+        xmlns:local="clr-namespace:WpfApp4.Model"
         mc:Ignorable="d"
         Title="BookWindow" Height="400" Width="460">
-    <Window.CommandBindings>
-        <CommandBinding Command="local:MyCommands.Ok"
-                        Executed="OkCommand_Executed"
-                        CanExecute="OkCommand_CanExecute"/>
-        <CommandBinding Command="local:MyCommands.Cancel"
-                        Executed="Cancel_Executed"
-                        CanExecute="Cancel_CanExecute"/>
-
-    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -43,11 +34,5 @@
         <Label Grid.Column="0" Grid.Row="3" FontSize="15" Content="Date" Margin="5,10,5,10"/>
         <DatePicker x:Name="newDate" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,10,5,10"
                    SelectedDate="{Binding Date}" SelectedDateFormat="Short" />
-        <!--Ok and Cancel buttons-->
-        <Button Grid.Column="0" Grid.Row="4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"
-                IsDefault="True" Content="Ok" Command="local:MyCommands.Ok"/>
-        <Button Grid.Column="1" Grid.Row="4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cancel"
-                IsCancel="True" Command="local:MyCommands.Cancel"/>
-
     </Grid>
 </Window>

@@ -23,5 +23,26 @@ namespace WpfApp4.Model
         {
             InitializeComponent();
         }
+
+        private void OkCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void OkCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (this.newTitle.Text != "" && this.newDate.Text != "" && this.newCost.Text != "")
+                e.CanExecute = true;
+        }
+
+        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
+
+        private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
     }
 }
