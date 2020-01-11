@@ -67,12 +67,9 @@ namespace WpfApp4.Model
         public void AddNewBook(ObservableCollection<Book> Books, BookWindow bookWindow)
         {
             Book book = new Book();
-            book.EditBook(bookWindow);
-                
-                
-                
+            book.EditBook(bookWindow);         
 
-            if (book.Title != "" && book.Cost != 0 && book.Date != null)
+           // if (book.Title != "" && book.Cost != 0 && book.Date != null)
                
                 Books.Add(book);
             book.Save();
