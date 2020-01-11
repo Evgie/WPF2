@@ -27,7 +27,6 @@ namespace WpfApp4
         public MainWindow()
         {
             InitializeComponent();
-
             authors = new ObservableCollection<Author>
             {
                 new Author
@@ -56,10 +55,70 @@ namespace WpfApp4
                 case "btnNewAuthor":    // Add NewAuthor.
                     AddAuthor();
                     break;
+                case "menuNewAuthor":    // Add NewAuthor.
+                    AddAuthor();
+                    break;
                 case "btnBookNew":  // Add NewBook.
                     AddBook();
                     break;
+                case "menuNewBook":  // Add NewBook.
+                    AddBook();
+                    break;
             }
+        }
+
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+           // e.OriginalSource
+           FrameworkElement feSource = e.OriginalSource as FrameworkElement;
+            if (feSource.Name == "btnNewAuthor")
+                e.CanExecute = true;
+            else if (feSource.Name == "btnBookNew")
+            {
+                if (this.authorList.SelectedItem is null)
+                {
+                    e.CanExecute = false;
+                    return;
+                }
+                e.CanExecute = true;
+            }
+            else if (feSource.Name == "menuNewAuthor")
+                e.CanExecute = true;
+
+            else if (feSource.Name == "menuNewBook")
+            {
+                //if (this.authorList.SelectedItem is null)
+                //{
+                //    e.CanExecute = false;
+                //    return;
+                //}
+                e.CanExecute = true;
+            }
+            //    switch (feSource.Name)
+            //    {
+            //        case "btnNewAuthor":
+            //            e.CanExecute = true;
+            //            break;
+            //        case "menuNewAuthor":
+            //            e.CanExecute = true;
+            //            break;
+            //        case "btnBookNew":
+            //            if (this.authorList.SelectedItem is null)
+            //            {
+            //                e.CanExecute = false;
+            //                return;
+            //            }
+            //            e.CanExecute = true;
+            //            break;
+            //        case "menuNewBook":
+            //            if (this.authorList.SelectedItem is null)
+            //            {
+            //                e.CanExecute = false;
+            //                return;
+            //            }
+            //            e.CanExecute = true;
+            //            break;
+            //    }
         }
 
         private void AddBook()
@@ -72,8 +131,7 @@ namespace WpfApp4
             if (!bookWindow.DialogResult.Value)
                 return;
             else
-            {
-                
+            {                
                 Author author = new Author();
                 author = (Author)this.authorList.SelectedItem;
                 author.AddNewBook(this.authors[this.authorList.SelectedIndex].Books, bookWindow);
@@ -92,17 +150,30 @@ namespace WpfApp4
                 return;
             else
                 author.AddNewAuthor(this.authors, authorWindow);
+        }       
+
+        private void DeleteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var selectedAuthor = this.authorList.SelectedItem as Author;
+            FrameworkElement feSource = e.Source as FrameworkElement;
+            switch (feSource.Name)
+            {
+                case "btnDeleteAuthor":     // Delete Author.
+                    this.authors.Remove(selectedAuthor);
+                    break;
+                case "btnBookDelete":       // Delete Book.
+                    var selectedBook = this.booksDataGrid.SelectedItem as Book;
+                    selectedAuthor.Books.Remove(selectedBook);
+                    break;
+            }
         }
 
-        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void DeleteCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             FrameworkElement feSource = e.Source as FrameworkElement;
             switch (feSource.Name)
             {
-                case "btnNewAuthor":    
-                    e.CanExecute = true; 
-                    break;
-                case "btnBookNew":
+                case "btnDeleteAuthor":
                     if (this.authorList.SelectedItem is null)
                     {
                         e.CanExecute = false;
@@ -110,17 +181,15 @@ namespace WpfApp4
                     }
                     e.CanExecute = true;
                     break;
-            }            
-        }
-
-        private void DeleteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-
+                case "btnBookDelete":
+                    if (this.booksDataGrid.SelectedItem is null)
+                    {
+                        e.CanExecute = false;
+                        return;
+                    }
+                    e.CanExecute = true;
+                    break;
+            }
         }
 
         private void ChangeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -131,15 +200,13 @@ namespace WpfApp4
                 case "btnChangeAuthor":    // Change Author.
                     ChangeAuthor();
                     break;
+                case "menuEditAuthor":
+                    ChangeAuthor();
+                    break;
                 case "btnBookChange":   // Change Book.
                     ChangeBook();   
                     break;
             }
-
-            //
-            //BookChange
-            //
-            //var bookWindow = new BookWindow() { DataContext = this.booksDataGrid.SelectedItem };
         }
 
         private void ChangeAuthor()
@@ -167,7 +234,18 @@ namespace WpfApp4
 
         private void ChangeBook()
         {
+            Book book = new Book();
+            Book initialBook = new Book();
+            var bookWindow = new BookWindow() { DataContext = this.booksDataGrid.SelectedItem };
+            book = (Book)this.booksDataGrid.SelectedItem;
+            initialBook = (Book)book.Clone();
+            bookWindow.ShowDialog();
 
+            if(!bookWindow.DialogResult.Value)
+            {
+                this.authors[this.authorList.SelectedIndex].Books[this.booksDataGrid.SelectedIndex] = initialBook;
+                return;
+            }
         }
 
         private void ChangeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -176,6 +254,14 @@ namespace WpfApp4
             switch (feSource.Name)
             {
                 case "btnChangeAuthor":
+                    if (this.authorList.SelectedItem is null)
+                    {
+                        e.CanExecute = false;
+                        return;
+                    }
+                    e.CanExecute = true;
+                    break;
+                case "menuEditAuthor":
                     if (this.authorList.SelectedItem is null)
                     {
                         e.CanExecute = false;

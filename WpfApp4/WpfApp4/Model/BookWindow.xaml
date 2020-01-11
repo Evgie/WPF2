@@ -16,6 +16,9 @@
 
     </Window.CommandBindings>
     <Grid>
+        <Grid.Resources>
+            <local:IsNewToTextConverter x:Key="isNewToTextConverter"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -28,9 +31,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--Header-->
-        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" 
-               Content="New Book"/>
+        <Label Grid.Column="0" Grid.Row="0" 
+               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" 
+               Content="{Binding IsNew, Converter={StaticResource isNewToTextConverter}}"/>
+        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
+               HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20" 
+               Content="Book"/>
         <!--Title-->
         <Label Grid.Column="0" Grid.Row="1" FontSize="15" Content="Title" Margin="5,10,5,10"/>
         <TextBox x:Name="newTitle" Grid.Column="1" Grid.Row="1" Margin="5,10,5,10" FontSize="15" VerticalContentAlignment="Center"

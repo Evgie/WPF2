@@ -23,6 +23,12 @@ namespace WpfApp4.Model
 
         public ObservableCollection<Book> Books { get; set; }
 
+        public Author()
+        {
+            this.BirthDate = DateTime.Now;
+            this.Books = new ObservableCollection<Book>();
+        }
+
         public object Clone()
         {
             return new Author
@@ -67,11 +73,8 @@ namespace WpfApp4.Model
         public void AddNewBook(ObservableCollection<Book> Books, BookWindow bookWindow)
         {
             Book book = new Book();
-            book.EditBook(bookWindow);         
-
-           // if (book.Title != "" && book.Cost != 0 && book.Date != null)
-               
-                Books.Add(book);
+            book.EditBook(bookWindow);
+            Books.Add(book);
             book.Save();
         }
     }

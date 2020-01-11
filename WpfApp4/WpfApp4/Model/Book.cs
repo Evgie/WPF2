@@ -15,6 +15,11 @@ namespace WpfApp4.Model
 
         public DateTime Date { get; set; }
 
+        public Book()
+        {
+            this.Date = DateTime.Now;
+        }
+
         public object Clone()
         {
             return new Book

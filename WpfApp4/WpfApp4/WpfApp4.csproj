@@ -68,6 +68,7 @@
     <Compile Include="Model\Languages.cs" />
     <Compile Include="Tools\DateTimeToDateConverter.cs" />
     <Compile Include="Tools\IsNewToTextConverter.cs" />
+    <Compile Include="Tools\LanguageToColorConverter.cs" />
     <Compile Include="Tools\MyCommands.cs" />
     <Compile Include="Views\DetailsControl.xaml.cs">
       <DependentUpon>DetailsControl.xaml</DependentUpon>

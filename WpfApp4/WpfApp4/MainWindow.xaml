@@ -50,13 +50,12 @@
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="15" Margin="3">
             <MenuItem>
                 <MenuItem.Header>File</MenuItem.Header>
-                <MenuItem Command="New">
-                </MenuItem>
-                <MenuItem Command="Delete">
-                </MenuItem>
+                <MenuItem x:Name="menuNewAuthor" Command="New" Header="New Author"/>
+                <MenuItem x:Name="menuNewBook" Command="New" Header="New Book"/>
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>Edit</MenuItem.Header>
+                <MenuItem x:Name="menuEditAuthor" Command="localTools:MyCommands.Change" Header="Edit Author"/>
             </MenuItem>
         </Menu>
         <!--Author List-->
@@ -73,14 +72,25 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="id" Header="#" Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="title" Header="Title" Binding="{Binding Title}"/>
-                <DataGridTextColumn x:Name="date" Header="Date" Binding="{Binding Date, Converter={StaticResource myDateConverter}}"/>
+                <DataGridTemplateColumn x:Name="date" Header="Date" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Date, Converter={StaticResource myDateConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Date}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
         <!--Book Buttons-->
         <Button x:Name="btnBookNew" Grid.Column="6" Grid.Row="4" Margin="2" Content="New" Command="New"/>
         <Button x:Name="btnBookChange" Grid.Column="7" Grid.Row="4" Margin="2" Content="Change" Command="localTools:MyCommands.Change"/>
-        <Button x:Name="btnBookDelete" Grid.Column="8" Grid.Row="4" Margin="2" Content="Delete"/>
+        <Button x:Name="btnBookDelete" Grid.Column="8" Grid.Row="4" Margin="2" Content="Delete" Command="Delete"/>
 
         <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="12">
             <Separator.RenderTransform>
@@ -91,6 +101,6 @@
         <!--Author Buttons-->
         <Button x:Name="btnNewAuthor" Grid.Column="0" Grid.Row="6" Margin="5" Content="New" Command="New"/>
         <Button x:Name="btnChangeAuthor" Grid.Column="1" Grid.Row="6" Margin="5" Content="Change" Command="localTools:MyCommands.Change"/>
-        <Button x:Name="btnDeleteAuthor" Grid.Column="2" Grid.Row="6" Margin="5" Content="Delete"/>
+        <Button x:Name="btnDeleteAuthor" Grid.Column="2" Grid.Row="6" Margin="5" Content="Delete" Command="Delete"/>
     </Grid>
 </Window>

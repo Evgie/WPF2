@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:WpfApp4.Tools"
         mc:Ignorable="d"
         Title="AuthorWindow" Height="540" Width="460">
+    <Window.Resources>
+        <local:LanguageToColorConverter x:Key="languageToColorConverter"/>
+    </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="local:MyCommands.Ok"
                         Executed="OkCommand_Executed"
@@ -15,7 +18,7 @@
                         CanExecute="Cancel_CanExecute"/>
 
     </Window.CommandBindings>
-    <Grid>
+    <Grid Background="{Binding Language, Converter={StaticResource languageToColorConverter}}">
         <Grid.Resources>
             <local:IsNewToTextConverter x:Key="isNewToTextConverter"/>
         </Grid.Resources>
@@ -35,9 +38,12 @@
         </Grid.ColumnDefinitions>
         
         <!--Header-->
-        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" 
+        <Label Grid.Column="0" Grid.Row="0"
+               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" 
                Content="{Binding IsNew, Converter={StaticResource isNewToTextConverter}}"/>
+        <Label Grid.Column="1" Grid.Row="0"
+               HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20" 
+               Content="Author"/>
         <!--FirstName-->
         <Label Grid.Column="0" Grid.Row="1" FontSize="15" Content="First name" Margin="5,10,5,10"/>
         <TextBox x:Name="newFirstName" Grid.Column="1" Grid.Row="1" Margin="5,10,5,10" FontSize="15" VerticalContentAlignment="Center"
@@ -56,7 +62,7 @@
                   SelectedItem="{Binding Country}"/>
         <!--Language-->
         <Label Grid.Column="0" Grid.Row="5" FontSize="15" Content="Language" Margin="5,10,5,10" />
-        <ComboBox x:Name="newLanguage" Grid.Column="1" Grid.Row="5" FontSize="15" Margin="5,10,5,10"
+        <ComboBox x:Name="newLanguage" Grid.Column="1" Grid.Row="5" FontSize="15" Margin="5,10,5,10" 
                   SelectedItem="{Binding Language}"/>
         <!--PlaceOfBirth-->
         <Label Grid.Column="0" Grid.Row="6" FontSize="15" Content="Place of birth" Margin="5,10,5,10"/>
