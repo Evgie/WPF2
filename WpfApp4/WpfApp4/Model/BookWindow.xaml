@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfApp4.Model.BookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp4.Tools"
+        mc:Ignorable="d"
+        Title="BookWindow" Height="400" Width="460">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:MyCommands.Ok"
+                        Executed="OkCommand_Executed"
+                        CanExecute="OkCommand_CanExecute"/>
+        <CommandBinding Command="local:MyCommands.Cancel"
+                        Executed="Cancel_Executed"
+                        CanExecute="Cancel_CanExecute"/>
+
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.Resources>
+            <local:IsNewToTextConverter x:Key="isNewToTextConverter"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Header-->
+        <Label Grid.Column="0" Grid.Row="0" 
+               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" 
+               Content="{Binding IsNew, Converter={StaticResource isNewToTextConverter}}"/>
+        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
+               HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20" 
+               Content="Book"/>
+        <!--Title-->
+        <Label Grid.Column="0" Grid.Row="1" FontSize="15" Content="Title" Margin="5,10,5,10"/>
+        <TextBox x:Name="newTitle" Grid.Column="1" Grid.Row="1" Margin="5,10,5,10" FontSize="15" VerticalContentAlignment="Center"
+                 Text="{Binding Title}"/>
+        <!--Cost-->
+        <Label Grid.Column="0" Grid.Row="2" FontSize="15" Content="Cost" Margin="5,10,5,10"/>
+        <TextBox x:Name="newCost" Grid.Column="1" Grid.Row="2" Margin="5,10,5,10" FontSize="15" VerticalContentAlignment="Center"
+                 Text="{Binding Cost}"/>
+        <!--Date-->
+        <Label Grid.Column="0" Grid.Row="3" FontSize="15" Content="Date" Margin="5,10,5,10"/>
+        <DatePicker x:Name="newDate" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,10,5,10"
+                   SelectedDate="{Binding Date}" SelectedDateFormat="Short" />
+        <!--Ok and Cancel buttons-->
+        <Button Grid.Column="0" Grid.Row="4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"
+                IsDefault="True" Content="Ok" Command="local:MyCommands.Ok"/>
+        <Button Grid.Column="1" Grid.Row="4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cancel"
+                IsCancel="True" Command="local:MyCommands.Cancel"/>
+
+    </Grid>
+</Window>
