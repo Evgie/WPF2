@@ -40,11 +40,12 @@ namespace WpfApp4
                     IsNew = false,
                     Books = new ObservableCollection<Book>
                     {
-                        new Book{ Title="NewBook", Date= DateTime.Now, Cost=10m, IsNew=false }
+                        new Book{ Title = "NewBook", Date = DateTime.Now, Cost = 10m, IsNew = false, Language = Languages.GetLanguage(1), IsRead = true }
                     }
                 }
             };
             this.DataContext = authors;
+            this.language.ItemsSource = Languages.languagesList;
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -69,69 +70,54 @@ namespace WpfApp4
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-           // e.OriginalSource
-           FrameworkElement feSource = e.OriginalSource as FrameworkElement;
-            if (feSource.Name == "btnNewAuthor")
-                e.CanExecute = true;
-            else if (feSource.Name == "btnBookNew")
+            if (e.Source is MenuItem)
             {
-                if (this.authorList.SelectedItem is null)
+                MenuItem menuItem = e.Source as MenuItem;
+                switch (menuItem.Name)
                 {
-                    e.CanExecute = false;
-                    return;
+                    case "menuNewAuthor":
+                        e.CanExecute = true;
+                        break;
+                    case "menuNewBook":
+                        if (this.authorList.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
                 }
-                e.CanExecute = true;
             }
-            else if (feSource.Name == "menuNewAuthor")
-                e.CanExecute = true;
-
-            else if (feSource.Name == "menuNewBook")
+            else if (e.Source is Button)
             {
-                //if (this.authorList.SelectedItem is null)
-                //{
-                //    e.CanExecute = false;
-                //    return;
-                //}
-                e.CanExecute = true;
+                Button btn = e.Source as Button;
+                switch (btn.Name)
+                {
+                    case "btnNewAuthor":
+                        e.CanExecute = true;
+                        break;
+                    case "btnBookNew":
+                        if (this.authorList.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                }
             }
-            //    switch (feSource.Name)
-            //    {
-            //        case "btnNewAuthor":
-            //            e.CanExecute = true;
-            //            break;
-            //        case "menuNewAuthor":
-            //            e.CanExecute = true;
-            //            break;
-            //        case "btnBookNew":
-            //            if (this.authorList.SelectedItem is null)
-            //            {
-            //                e.CanExecute = false;
-            //                return;
-            //            }
-            //            e.CanExecute = true;
-            //            break;
-            //        case "menuNewBook":
-            //            if (this.authorList.SelectedItem is null)
-            //            {
-            //                e.CanExecute = false;
-            //                return;
-            //            }
-            //            e.CanExecute = true;
-            //            break;
-            //    }
         }
 
         private void AddBook()
         {
             Book book = new Book();
             BookWindow bookWindow = new BookWindow() { DataContext = book };
-            bookWindow.Owner = this;
             bookWindow.ShowDialog();
 
             if (!bookWindow.DialogResult.Value)
                 return;
             else
-            {                
+            {
                 Author author = new Author();
                 author = (Author)this.authorList.SelectedItem;
                 author.AddNewBook(this.authors[this.authorList.SelectedIndex].Books, bookWindow);
@@ -150,62 +136,119 @@ namespace WpfApp4
                 return;
             else
                 author.AddNewAuthor(this.authors, authorWindow);
-        }       
+        }
 
         private void DeleteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedAuthor = this.authorList.SelectedItem as Author;
-            FrameworkElement feSource = e.Source as FrameworkElement;
-            switch (feSource.Name)
+            if (e.Source is MenuItem)
             {
-                case "btnDeleteAuthor":     // Delete Author.
-                    this.authors.Remove(selectedAuthor);
-                    break;
-                case "btnBookDelete":       // Delete Book.
-                    var selectedBook = this.booksDataGrid.SelectedItem as Book;
-                    selectedAuthor.Books.Remove(selectedBook);
-                    break;
+                MenuItem menuItem = e.Source as MenuItem;
+                switch (menuItem.Name)
+                {
+                    case "menuRemoveAuthor":
+                        this.authors.Remove(selectedAuthor);
+                        break;
+                    case "menuRemoveBook":
+                        var selectedBook = this.booksDataGrid.SelectedItem as Book;
+                        selectedAuthor.Books.Remove(selectedBook);
+                        break;
+                }
+            }
+            else if (e.Source is Button)
+            {
+                Button btn = e.Source as Button;
+                switch (btn.Name)
+                {
+                    case "btnDeleteAuthor":
+                        this.authors.Remove(selectedAuthor);
+                        break;
+
+                    case "btnBookDelete":
+                        var selectedBook = this.booksDataGrid.SelectedItem as Book;
+                        selectedAuthor.Books.Remove(selectedBook);
+                        break;
+                }
             }
         }
 
         private void DeleteCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            FrameworkElement feSource = e.Source as FrameworkElement;
-            switch (feSource.Name)
+            if (e.Source is MenuItem)
             {
-                case "btnDeleteAuthor":
-                    if (this.authorList.SelectedItem is null)
-                    {
-                        e.CanExecute = false;
-                        return;
-                    }
-                    e.CanExecute = true;
-                    break;
-                case "btnBookDelete":
-                    if (this.booksDataGrid.SelectedItem is null)
-                    {
-                        e.CanExecute = false;
-                        return;
-                    }
-                    e.CanExecute = true;
-                    break;
+                MenuItem menuItem = e.Source as MenuItem;
+                switch (menuItem.Name)
+                {
+                    case "menuRemoveAuthor":
+                        if (this.authorList.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                    case "menuRemoveBook":
+                        if (this.booksDataGrid.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                }
+            }
+            else if (e.Source is Button)
+            {
+                Button btn = e.Source as Button;
+                switch (btn.Name)
+                {
+                    case "btnDeleteAuthor":
+                        if (this.authorList.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                    case "btnBookDelete":
+                        if (this.booksDataGrid.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                }
             }
         }
 
         private void ChangeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            FrameworkElement feSource = e.Source as FrameworkElement;
-            switch (feSource.Name)
+            if (e.Source is MenuItem)
             {
-                case "btnChangeAuthor":    // Change Author.
-                    ChangeAuthor();
-                    break;
-                case "menuEditAuthor":
-                    ChangeAuthor();
-                    break;
-                case "btnBookChange":   // Change Book.
-                    ChangeBook();   
-                    break;
+                MenuItem menuItem = e.Source as MenuItem;
+                switch (menuItem.Name)
+                {
+                    case "menuEditAuthor":
+                        ChangeAuthor();
+                        break;
+                    case "menuEditBook":
+                        ChangeBook();
+                        break;
+                }
+            }
+            else if (e.Source is Button)
+            {
+                Button btn = e.Source as Button;
+                switch (btn.Name)
+                {
+                    case "btnChangeAuthor":
+                        ChangeAuthor();
+                        break;
+                    case "btnBookChange":
+                        ChangeBook();
+                        break;
+                }
             }
         }
 
@@ -241,7 +284,7 @@ namespace WpfApp4
             initialBook = (Book)book.Clone();
             bookWindow.ShowDialog();
 
-            if(!bookWindow.DialogResult.Value)
+            if (!bookWindow.DialogResult.Value)
             {
                 this.authors[this.authorList.SelectedIndex].Books[this.booksDataGrid.SelectedIndex] = initialBook;
                 return;
@@ -250,34 +293,53 @@ namespace WpfApp4
 
         private void ChangeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            FrameworkElement feSource = e.Source as FrameworkElement;
-            switch (feSource.Name)
+            if (e.Source is MenuItem)
             {
-                case "btnChangeAuthor":
-                    if (this.authorList.SelectedItem is null)
-                    {
-                        e.CanExecute = false;
-                        return;
-                    }
-                    e.CanExecute = true;
-                    break;
-                case "menuEditAuthor":
-                    if (this.authorList.SelectedItem is null)
-                    {
-                        e.CanExecute = false;
-                        return;
-                    }
-                    e.CanExecute = true;
-                    break;
-                case "btnBookChange":
-                    if (this.booksDataGrid.SelectedItem is null)
-                    {
-                        e.CanExecute = false;
-                        return;
-                    }
-                    e.CanExecute = true;
-                    break;
+                MenuItem menuItem = e.Source as MenuItem;
+                switch (menuItem.Name)
+                {
+                    case "menuEditAuthor":
+                        if (this.authorList.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                    case "menuEditBook":
+                        if (this.booksDataGrid.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                }
+            }
+            else if (e.Source is Button)
+            {
+                Button btn = e.Source as Button;
+                switch (btn.Name)
+                {
+                    case "btnChangeAuthor":
+                        if (this.authorList.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                    case "btnBookChange":
+                        if (this.booksDataGrid.SelectedItem is null)
+                        {
+                            e.CanExecute = false;
+                            return;
+                        }
+                        e.CanExecute = true;
+                        break;
+                }
             }
         }
     }
 }
+

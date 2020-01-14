@@ -54,9 +54,7 @@ namespace WpfApp4.Model
         public void AddNewAuthor(ObservableCollection<Author> authors, AuthorWindow authorWindow)
         {
             this.EditAuthor(authorWindow);
-
-            if (this.FirstName != "" && this.LastName != "" && this.BirthDate != null && this.Country != "" && this.Language != "" && this.PlaceOfBirth != "")
-                authors.Add(this);
+            authors.Add(this);
             this.Save();
         }
 

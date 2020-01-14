@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfApp4"
         xmlns:localViews="clr-namespace:WpfApp4.Views"
         xmlns:localTools="clr-namespace:WpfApp4.Tools"
+        xmlns:localModel="clr-namespace:WpfApp4.Model"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.CommandBindings>
@@ -21,7 +22,7 @@
     </Window.CommandBindings>
     <Grid>
         <Grid.Resources>
-            <localTools:DateTimeToDateConverter x:Key="myDateConverter" />
+            <localTools:DateTimeToDateConverter x:Key="myDateConverter"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -47,15 +48,29 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--Menu-->
-        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="15" Margin="3">
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="15" Margin="3" x:Name="menu">
+            <Menu.CommandBindings>
+                <CommandBinding Command="New" 
+                                Executed="NewCommand_Executed" 
+                                CanExecute="NewCommand_CanExecute"/>
+                <CommandBinding Command="Delete"
+                        Executed="DeleteCommand_Executed"
+                        CanExecute="DeleteCommand_CanExecute"/>
+                <CommandBinding Command="localTools:MyCommands.Change"
+                        Executed="ChangeCommand_Executed"
+                        CanExecute="ChangeCommand_CanExecute"/>
+            </Menu.CommandBindings>
             <MenuItem>
                 <MenuItem.Header>File</MenuItem.Header>
                 <MenuItem x:Name="menuNewAuthor" Command="New" Header="New Author"/>
                 <MenuItem x:Name="menuNewBook" Command="New" Header="New Book"/>
+                <MenuItem x:Name="menuRemoveAuthor" Command="Delete" Header="Remove Author"/>
+                <MenuItem x:Name="menuRemoveBook" Command="Delete" Header="Remove Book"/>
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>Edit</MenuItem.Header>
                 <MenuItem x:Name="menuEditAuthor" Command="localTools:MyCommands.Change" Header="Edit Author"/>
+                <MenuItem x:Name="menuEditBook" Command="localTools:MyCommands.Change" Header="Edit Book"/>
             </MenuItem>
         </Menu>
         <!--Author List-->
@@ -84,6 +99,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
+                <DataGridComboBoxColumn x:Name="language" Header="Language" SelectedItemBinding="{Binding Language}"/>
+                <DataGridCheckBoxColumn x:Name="isRead" Header="Read" Binding="{Binding IsRead}"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -15,9 +15,15 @@ namespace WpfApp4.Model
 
         public DateTime Date { get; set; }
 
+        public string Language { get; set; }
+
+        public bool IsRead { get; set; }
+
         public Book()
         {
             this.Date = DateTime.Now;
+            this.Language = Languages.languagesList[0];
+            this.IsRead = false;
         }
 
         public object Clone()
@@ -27,9 +33,10 @@ namespace WpfApp4.Model
                 Title = this.Title,
                 Cost = this.Cost,
                 Date = this.Date,
-
+                Language = this.Language,
                 Id = this.Id,
-                IsNew = this.IsNew
+                IsNew = this.IsNew,
+                IsRead = this.IsRead
             };
         }
 
