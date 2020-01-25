@@ -31,23 +31,23 @@ namespace WpfApp5.ViewModel
             }
         }
 
-        public Employee SelectedEmployee { get; set; }
+        public Employee selectedEmployee;
 
-        //public Employee SelectedEmployee
-        //{
-        //    get
-        //    {
-        //        return this.selectedEmployee;
-        //    }
-        //    set
-        //    {
-        //        if (this.selectedEmployee == value)
-        //            return;
+        public Employee SelectedEmployee
+        {
+            get
+            {
+                return this.selectedEmployee;
+            }
+            set
+            {
+                if (this.selectedEmployee == value)
+                    return;
 
-        //        this.selectedEmployee = value;
-        //        this.OnPropertyChanged(nameof(this.SelectedEmployee));
-        //    }
-        //}
+                this.selectedEmployee = value;
+                this.OnPropertyChanged(nameof(this.SelectedEmployee));
+            }
+        }
 
         public ICommand NewCommand { get; set; }
 
