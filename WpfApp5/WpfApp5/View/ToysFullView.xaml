@@ -74,5 +74,16 @@
                  Grid.Column="1"
                  Margin="5"
                  Text="{Binding Type}"/>
+        <!--Image-->
+        <Label Grid.Row="6"
+               Grid.Column="0"
+               Margin="5"
+               Content="Image"/>
+        <Image Grid.Row="6"
+                 Grid.Column="1"
+                 Margin="5"
+               Height="50"
+               Width="50"
+                 Source="{Binding Image}"/>
     </Grid>
 </UserControl>

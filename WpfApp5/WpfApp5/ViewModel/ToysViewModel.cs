@@ -62,9 +62,9 @@ namespace WpfApp5.ViewModel
         {
             this.Toys = new ObservableCollection<Toy>
             {
-                new Toy{Brand = "Barbie", Model = "Doll", Price = 15.00m, Country = "USA", Age = 7, Type = "Fashion Doll"},
-                new Toy{Brand = "LOL", Model = "Doll", Price = 25.00m, Country = "USA", Age = 3, Type = "Fashion Doll"},
-                new Toy{Brand = "Trefl", Model = "Puzzle", Price = 10.00m, Country = "Poland", Age = 8, Type = "Game"},
+                new Toy{Brand = "Barbie", Model = "Doll", Price = 15.00m, Country = "USA", Age = 7, Type = "Fashion Doll", Image = "/Resourses/barbie.jpg"},
+                new Toy{Brand = "LOL", Model = "Doll", Price = 25.00m, Country = "USA", Age = 3, Type = "Fashion Doll", Image = "/Resourses/lol.jpg"},
+                new Toy{Brand = "Trefl", Model = "Puzzle", Price = 10.00m, Country = "Poland", Age = 8, Type = "Game", Image = "/Resourses/trefl.jpg"},
             };
             this.RemoveCommand = new RelayCommand(this.RemoveExecute, this.RemoveCanExecute);
             this.DefaultCommand = new RelayCommand(this.DefaultExecute, this.DefaultCanExecute);
@@ -86,10 +86,12 @@ namespace WpfApp5.ViewModel
 
         public void DefaultExecute(object obj)
         {
-            int index = this.Toys.IndexOf(this.SelectedToy);
-            this.Toys.RemoveAt(index);
-            this.Toys.Insert(index, new Toy { Brand = "MyBrand", Model = "MyModel", Price = 0, Country = "Ukraine", Age = 0, Type = "MyType" });
-
+            this.SelectedToy.Brand = "MyBrand";
+            this.SelectedToy.Model = "MyModel";
+            this.SelectedToy.Price = 0;
+            this.SelectedToy.Country = "Ukraine";
+            this.SelectedToy.Age = 0;
+            this.SelectedToy.Type = "MyType";
         }
 
         public bool DefaultCanExecute(object obj)
