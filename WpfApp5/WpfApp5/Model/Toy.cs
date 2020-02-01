@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace WpfApp5.Model
 {
-    class Toy
+    public class Toy
     {
+        public string Brand { get; set; }
+
+        public string Model { get; set; }
+
+        public decimal Price { get; set; }
+
+        public string Country { get; set; }
+
+        public int Age { get; set; }
+
+        public string Type { get; set; }
     }
 }
