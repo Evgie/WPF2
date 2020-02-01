@@ -1,0 +1,124 @@
+﻿<Window x:Class="Task2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle">
+            <Setter Property="Control.FontFamily" Value="Calibri"/>
+            <Setter Property="Control.FontSize" Value="18"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+            <Setter Property="Control.Padding" Value="5"/>
+            <Setter Property="Control.Margin" Value="5"/>
+            <Setter Property="Control.Background" Value="Yellow"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type TextBlock}}"
+               TargetType="TextBlock"
+               x:Key="TitleText">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.0" Color="Red"/>
+                            <GradientStop Offset="1.0" Color="Green"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="Control.FontFamily" Value="Calibri"/>
+                <Setter Property="Control.FontSize" Value="15"/>
+                <Setter Property="TextBox.VerticalContentAlignment" Value="Center"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="Control.IsFocused" Value="True">
+                    <Setter Property="Control.Foreground" Value="Red"/>
+                    <Setter Property="TextBox.BorderBrush" Value="LightBlue"/>
+                    <Setter Property="TextBox.BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--<Style TargetType="Button">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Control.IsFocused" Value="True"/>
+                        <Condition Property="Control.IsMouseOver" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="Control.FontWeight" Value="Bold"/>
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>-->
+        <!--<Style TargetType="Button">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="FontSize"
+                                                 To="40">                                    
+                                </DoubleAnimation>
+                                <ColorAnimation Duration="0:0:1" 
+                                                Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="Red" To="Green"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="FontSize">
+                                </DoubleAnimation>
+                                <ColorAnimation Duration="0:0:1" 
+                                                Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" From="Green" To="Aqua"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>-->
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=checkBox1, Path=IsChecked}"
+                             Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+        <Button Style="{StaticResource MyButtonStyle}">
+            Customized Button
+        </Button>        
+            <TextBlock Text="Hello"/>
+            <TextBlock Style="{StaticResource TitleText}"
+                       Text="Hello"/>
+            <TextBox>Enter the text</TextBox>
+            <Button>Trigger Button</Button>
+            <StackPanel>
+            <CheckBox x:Name="checkBox1"
+                      Padding="10"
+                      Content="Disable"/>
+            <Button x:Name="button1" Padding="10"
+                    Content="Button"/>
+            </StackPanel>
+        </StackPanel>        
+    </Grid>
+</Window>
