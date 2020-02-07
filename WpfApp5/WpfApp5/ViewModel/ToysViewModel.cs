@@ -66,8 +66,8 @@ namespace WpfApp5.ViewModel
                 new Toy{Brand = "LOL", Model = "Doll", Price = 25.00m, Country = "USA", Age = 3, Type = "Fashion Doll", Image = "/Resourses/lol.jpg"},
                 new Toy{Brand = "Trefl", Model = "Puzzle", Price = 10.00m, Country = "Poland", Age = 8, Type = "Game", Image = "/Resourses/trefl.jpg"},
             };
-            this.RemoveCommand = new RelayCommand(this.RemoveExecute, this.RemoveCanExecute);
-            this.DefaultCommand = new RelayCommand(this.DefaultExecute, this.DefaultCanExecute);
+            this.RemoveCommand = new RelayCommand(this.RemoveExecute, this.MyCommandsCanExecute);
+            this.DefaultCommand = new RelayCommand(this.DefaultExecute, this.MyCommandsCanExecute);
         }
 
         public ICommand RemoveCommand { get; set; }
@@ -79,7 +79,7 @@ namespace WpfApp5.ViewModel
             this.Toys.Remove(this.SelectedToy);
         }
 
-        public bool RemoveCanExecute(object obj)
+        public bool MyCommandsCanExecute(object obj)
         {
             return !(this.SelectedToy is null);
         }
@@ -92,11 +92,6 @@ namespace WpfApp5.ViewModel
             this.SelectedToy.Country = "Ukraine";
             this.SelectedToy.Age = 0;
             this.SelectedToy.Type = "MyType";
-        }
-
-        public bool DefaultCanExecute(object obj)
-        {
-            return !(this.SelectedToy is null);
         }
     }
 }
