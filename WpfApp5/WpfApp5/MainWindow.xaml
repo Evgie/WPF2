@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:WpfApp5.View"
         xmlns:viewModel="clr-namespace:WpfApp5.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="850" Width="800">
+        Title="MainWindow" Height="450" Width="450">
     <Window.DataContext>
         <viewModel:ToysViewModel/>
     </Window.DataContext>
@@ -21,17 +21,17 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListView Margin="10"
                   x:Name="listToys"
                   Grid.Row="0"
-                  Grid.Column="0"
+                  Grid.Column="0" 
                   ItemsSource="{Binding Path=Toys}"
                   ItemTemplate="{StaticResource ResourceKey=toysView}"
                   SelectedItem="{Binding SelectedToy}"/>
