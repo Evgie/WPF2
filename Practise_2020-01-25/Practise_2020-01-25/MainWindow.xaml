@@ -1,0 +1,42 @@
+﻿<Window x:Class="Practise_2020_01_25.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practise_2020_01_25"
+        xmlns:viewModel="clr-namespace:Practise_2020_01_25.ViewModel"
+        xmlns:customerControl="clr-namespace:Practise_2020_01_25.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+   
+    <Window.DataContext>
+        <viewModel:CustomerEditViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger  Property="Control.IsFocused" Value="True">
+                <Setter Property="Control.Foreground" Value="Red"/>
+                <Setter Property="TextBox.BorderBrush" Value="LightBlue"/>
+                <Setter Property="TextBox.BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="customerViewTemplate">
+            <customerControl:CustomerEditView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" 
+                  ItemsSource="{Binding Path=Customers}" 
+                  ItemTemplate="{StaticResource customerViewTemplate}"
+                  SelectedItem="{Binding SelectedCustomer}"/>
+        <customerControl:CustomerEditView DataContext="{Binding SelectedCustomer}"
+                                          Grid.Column="1"/>
+    </Grid>
+</Window>
