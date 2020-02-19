@@ -18,7 +18,7 @@ namespace HomeTask.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Database=HRDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Database=HR_Att;Trusted_Connection=True;");
         }
     }
 }
