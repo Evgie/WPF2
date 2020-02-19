@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HomeTask.Models
+{
+    public class Country
+    {
+        public string CountryId { get; set; }
+        public string CountryName { get; set; }
+        public int RegionId { get; set; }
+        public Region Region { get; set; }
+
+        public ICollection<Location> Locations { get; set; }
+    }
+}
