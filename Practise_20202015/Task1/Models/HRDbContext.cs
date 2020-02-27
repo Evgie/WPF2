@@ -24,9 +24,6 @@ namespace HomeTask.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Employee>()
-            //    .Property(s => s.EmployeeId)
-            //    .IsRequired();
             modelBuilder.Entity<Employee>()
                 .HasOne<Job>(emp => emp.Job)
                 .WithMany(job => job.Employees);
@@ -38,11 +35,6 @@ namespace HomeTask.Models
             modelBuilder.Entity<Employee>()
                 .HasOne<Department>(emp => emp.Department)
                 .WithMany(dep => dep.Employees);
-
-            //modelBuilder.Entity<Employee>()
-            //    .HasOne<JobHistory>(emp => emp.JobHistory)
-            //    .WithMany(jobH => jobH.Employees)
-            //    .HasForeignKey(emp => emp.EmployeeId);
 
             modelBuilder.Entity<JobHistory>()
                 .HasKey(jobH => new { jobH.EmployeeId, jobH.StartDate });

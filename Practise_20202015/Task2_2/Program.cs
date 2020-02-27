@@ -37,7 +37,10 @@ namespace Task2_2
                 //
                 //Lazy.
                 //
-                var order = context.Order.FirstOrDefault();
+                var order = context.Order
+                    .Where(o => o.DeliveryStreet != null)
+                    .Select(o => new { OrderId = o.Id, DeliveryStreet = o.DeliveryStreet, OrderStatusName = o.OrderStatus.Name})
+                    .ToList();
 
             }
         }
