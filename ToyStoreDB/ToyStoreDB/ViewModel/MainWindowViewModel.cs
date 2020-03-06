@@ -70,15 +70,20 @@ namespace ToyStoreDB.ViewModel
             this.Toys = new ObservableCollection<Toy>(tempToys);
 
             this.RemoveCommand = new RelayCommand(this.RemoveExecute, this.MyCommandsCanExecute);
-            this.DefaultCommand = new RelayCommand(this.DefaultExecute, this.MyCommandsCanExecute);
+            this.AddCommand = new RelayCommand(this.AddtExecute);
+            this.UpdateCommand = new RelayCommand(this.UpdatetExecute, this.MyCommandsCanExecute);
         }
 
         public ICommand RemoveCommand { get; set; }
 
-        public ICommand DefaultCommand { get; set; }
+        public ICommand AddCommand { get; set; }
+
+        public ICommand UpdateCommand { get; set; }        
 
         public void RemoveExecute(object obj)
         {
+            this.ToyRepository.Delete(this.SelectedToy);
+            this.ToyRepository.Save();
             this.Toys.Remove(this.SelectedToy);
         }
 
@@ -87,7 +92,13 @@ namespace ToyStoreDB.ViewModel
             return !(this.SelectedToy is null);
         }
 
-        public void DefaultExecute(object obj)
+        public void UpdatetExecute(object obj)
+        {
+            this.ToyRepository.Update(this.SelectedToy);            
+            this.ToyRepository.Save();
+        }
+
+        public void AddtExecute(object obj)
         {
             Toy newToy = Toy.GetNewToy();
             this.ToyRepository.Add(newToy);

@@ -131,5 +131,20 @@ namespace ToyStore.DAL.Model
         {
             return new Toy { Age = 3, Brand = "WOWToys", Country = "UK", Model = "Tourist Bus", Price = 35.00m, Type = "car" };
         }
+
+        public Toy UpdateToy(Toy toy)
+        {
+            Toy newToy = new Toy
+            {
+                ToyId = toy.ToyId,
+                Brand = toy.Brand,
+                Model = toy.Model,
+                Price = toy.Price,
+                Country = toy.Country,
+                Age = toy.Age,
+                Type = toy.Type
+            };
+            return newToy;
+        }
     }
 }

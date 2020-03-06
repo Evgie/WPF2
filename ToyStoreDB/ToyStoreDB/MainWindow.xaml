@@ -39,19 +39,25 @@
                      Grid.Column="1"
                      Grid.Row="0"
                      Content="{Binding SelectedToy}"/>
-        <Button Grid.Column="0"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                Margin="5"
-                Grid.Row="1"
-                Content="Remove"
-                Command="{Binding RemoveCommand}"/>
-        <Button Grid.Column="1"
-                VerticalAlignment="Center"
+        
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Margin="5"
+                    Grid.ColumnSpan="2">
+            <Button Margin="5"
+                    Content="Add"
+                    Command="{Binding AddCommand}"/>
+            <Button Margin="5"
+                    Content="Update"
+                    Command="{Binding UpdateCommand}"/>
+            <Button VerticalAlignment="Center"
                 HorizontalAlignment="Left"
                 Margin="5"
-                Grid.Row="1"
-                Content="Default"
-                Command="{Binding DefaultCommand}"/>
+                Content="Remove"
+                Command="{Binding RemoveCommand}"/>
+        </StackPanel>
+
     </Grid>
 </Window>
