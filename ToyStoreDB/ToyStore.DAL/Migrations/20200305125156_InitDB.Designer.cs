@@ -9,7 +9,7 @@ using ToyStore.DAL;
 namespace ToyStore.DAL.Migrations
 {
     [DbContext(typeof(ToyStoreDbContext))]
-    [Migration("20200301114050_InitDB")]
+    [Migration("20200305125156_InitDB")]
     partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

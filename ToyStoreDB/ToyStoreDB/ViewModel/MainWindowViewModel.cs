@@ -64,11 +64,11 @@ namespace ToyStoreDB.ViewModel
         {
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
                 return;
-                        
+
             this.ToyRepository = new GenericRepository<Toy>();
             var tempToys = ToyRepository.Get();
             this.Toys = new ObservableCollection<Toy>(tempToys);
-            
+
             this.RemoveCommand = new RelayCommand(this.RemoveExecute, this.MyCommandsCanExecute);
             this.DefaultCommand = new RelayCommand(this.DefaultExecute, this.MyCommandsCanExecute);
         }
