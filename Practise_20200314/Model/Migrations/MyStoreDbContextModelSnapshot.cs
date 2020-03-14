@@ -34,6 +34,18 @@ namespace Model.Migrations
                     b.HasKey("BrandId");
 
                     b.ToTable("brands (production)");
+
+                    b.HasData(
+                        new
+                        {
+                            BrandId = 1,
+                            BrandName = "Nike"
+                        },
+                        new
+                        {
+                            BrandId = 2,
+                            BrandName = "Levis"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Category", b =>
@@ -51,6 +63,18 @@ namespace Model.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("categories (production)");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Shoes"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Clothes"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Customer", b =>
@@ -96,6 +120,24 @@ namespace Model.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("customers (sales)");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            Email = "t.hanks@gmail.com",
+                            FirstName = "Tom",
+                            LastName = "Hanks",
+                            Phone = "112233"
+                        },
+                        new
+                        {
+                            CustomerId = 2,
+                            Email = "a.potter@gmail.com",
+                            FirstName = "Alice",
+                            LastName = "Potter",
+                            Phone = "911"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Order", b =>
@@ -140,6 +182,41 @@ namespace Model.Migrations
                     b.HasIndex("StoreId");
 
                     b.ToTable("orders (sales)");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            CustomerId = 1,
+                            OrderDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrderStatus = "Delivered",
+                            RequiredDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ShippedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StaffId = 1,
+                            StoreId = 1
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            CustomerId = 1,
+                            OrderDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrderStatus = "Ready for delivery",
+                            RequiredDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ShippedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StaffId = 2,
+                            StoreId = 2
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            CustomerId = 2,
+                            OrderDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrderStatus = "Ordered",
+                            RequiredDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ShippedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StaffId = 1,
+                            StoreId = 2
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.OrderItem", b =>
@@ -173,6 +250,44 @@ namespace Model.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("order_items (sales)");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            ItemId = 1,
+                            Discount = (byte)0,
+                            ListPrice = 10m,
+                            ProductId = 1,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            OrderId = 1,
+                            ItemId = 2,
+                            Discount = (byte)0,
+                            ListPrice = 150m,
+                            ProductId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            ItemId = 3,
+                            Discount = (byte)5,
+                            ListPrice = 11m,
+                            ProductId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            ItemId = 4,
+                            Discount = (byte)0,
+                            ListPrice = 140m,
+                            ProductId = 2,
+                            Quantity = 2
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Product", b =>
@@ -210,6 +325,26 @@ namespace Model.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("products (production)");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            ListPrice = 0m,
+                            ModelYear = 2000,
+                            ProductName = "Sneakers"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            ListPrice = 0m,
+                            ModelYear = 2000,
+                            ProductName = "Jeans"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Staff", b =>
@@ -253,6 +388,24 @@ namespace Model.Migrations
                     b.HasIndex("StoreId");
 
                     b.ToTable("staffs (sales)");
+
+                    b.HasData(
+                        new
+                        {
+                            StaffId = 1,
+                            FirstName = "Sam",
+                            LastName = "Newton",
+                            ManagerId = 1,
+                            StoreId = 1
+                        },
+                        new
+                        {
+                            StaffId = 2,
+                            FirstName = "Bill",
+                            LastName = "Clinton",
+                            ManagerId = 2,
+                            StoreId = 1
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Stock", b =>
@@ -274,6 +427,32 @@ namespace Model.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("stocks (production)");
+
+                    b.HasData(
+                        new
+                        {
+                            StoreId = 1,
+                            ProductId = 1,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            StoreId = 1,
+                            ProductId = 2,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            StoreId = 2,
+                            ProductId = 1,
+                            Quantity = 21
+                        },
+                        new
+                        {
+                            StoreId = 2,
+                            ProductId = 2,
+                            Quantity = 100
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Store", b =>
@@ -315,6 +494,18 @@ namespace Model.Migrations
                     b.HasKey("StoreId");
 
                     b.ToTable("stores (sales)");
+
+                    b.HasData(
+                        new
+                        {
+                            StoreId = 1,
+                            StoreName = "Nike"
+                        },
+                        new
+                        {
+                            StoreId = 2,
+                            StoreName = "Walmart"
+                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Order", b =>
