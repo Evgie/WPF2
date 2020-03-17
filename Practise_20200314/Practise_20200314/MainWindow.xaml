@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practise_20200314"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MyStore" Height="450" Width="800">
     <Grid>
-
+        <TabControl>
+            <TabItem Header="Admin Control">Первая вкладка</TabItem>
+            <TabItem Header="Client Control">Вторая вкладка</TabItem>
+        </TabControl>
     </Grid>
 </Window>
