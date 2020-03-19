@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practise_20200314"
+        xmlns:adminView="clr-namespace:View.AdminView"
         mc:Ignorable="d"
         Title="MyStore" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="Admin Control">Первая вкладка</TabItem>
+            <TabItem Header="Admin Control">
+                <adminView:AdminView/>
+            </TabItem>
             <TabItem Header="Client Control">Вторая вкладка</TabItem>
         </TabControl>
     </Grid>
