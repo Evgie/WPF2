@@ -1,32 +1,14 @@
-﻿using System;
+﻿using Model.Entities;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 
-namespace Model.Entities
+namespace ViewModel.ClientViewModel
 {
-    public class Stock : INotifyPropertyChanged
+    public class ProductDetailedViewModel : INotifyPropertyChanged
     {
-        public int StoreId { get; set; }
-        public int ProductId { get; set; }
-
-        private int quantity;
-        public int Quantity
-        {
-            get
-            {
-                return this.quantity;
-            }
-            set
-            {
-                if (this.quantity == value)
-                    return;
-
-                this.quantity = value;
-                this.OnPropertyChanged(nameof(this.Quantity));
-            }
-        }
-
         private Product product;
         public Product Product
         {
@@ -43,10 +25,13 @@ namespace Model.Entities
                 this.OnPropertyChanged(nameof(this.Product));
             }
         }
-        public Store Store { get; set; }
+
+        public ProductDetailedViewModel(Product product)
+        {
+            this.Product = product;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged is null)

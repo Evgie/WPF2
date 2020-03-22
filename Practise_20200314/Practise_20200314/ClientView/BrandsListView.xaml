@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="View.AdminView.CustomersListView"
+﻿<UserControl x:Class="View.ClientView.BrandsListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View.AdminView"
-             xmlns:adminViewModel="clr-namespace:ViewModel.AdminViewModel;assembly=ViewModel"
+             xmlns:local="clr-namespace:View.ClientView"
+             xmlns:clientViewModel="clr-namespace:ViewModel.ClientViewModel;assembly=ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <adminViewModel:CustomersListViewModel/>
+        <clientViewModel:BrandsListViewModel/>
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,31 +16,30 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.25*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.25*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--Customers List-->
-
+        <!--Brands List-->
         <Label Margin="5"
                Grid.Row="0"
                Grid.Column="0"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"
-               Content="Customers List"/>
+               Content="Brands List"/>
         <ListView Margin="10"
                   Grid.Row="1"
                   Grid.Column="0"
                   Grid.RowSpan="3"
-                  ItemsSource="{Binding Path=Customers}"
-                  SelectedItem="{Binding SelectedCustomer}"/>
+                  ItemsSource="{Binding Path=Brands}"
+                  SelectedItem="{Binding SelectedBrand}"/>
 
-        <!--Orders List-->
-        <local:OrdersListView Grid.Column="1"
+        <!--Products List-->
+        <local:ProductsListView Grid.Column="1"
                               Grid.Row="0"
                               Grid.RowSpan="4"
-                              DataContext="{Binding OrdersListViewModel}"/>
+                              DataContext="{Binding ProductsListViewModel}"/>
     </Grid>
 </UserControl>

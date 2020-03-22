@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practise_20200314"
         xmlns:adminView="clr-namespace:View.AdminView"
+        xmlns:clientView="clr-namespace:View.ClientView"
         mc:Ignorable="d"
         Title="MyStore" Height="450" Width="800">
     <Grid>
         <TabControl>
             <TabItem Header="Admin Control">
-                <adminView:AdminView/>
+                <adminView:CustomersListView/>
             </TabItem>
-            <TabItem Header="Client Control">Вторая вкладка</TabItem>
+            <TabItem Header="Client Control">
+                <clientView:BrandsListView/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

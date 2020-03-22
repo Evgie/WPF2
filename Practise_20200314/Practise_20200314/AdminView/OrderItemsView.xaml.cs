@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace View.AdminView
 {
     /// <summary>
-    /// Interaction logic for AdminView.xaml
+    /// Interaction logic for OrderItemsView.xaml
     /// </summary>
-    public partial class CustomersListView : UserControl
+    public partial class OrderItemsView : UserControl
     {
-        public CustomersListView()
+        public OrderItemsView()
         {
             InitializeComponent();
         }

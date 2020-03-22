@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace View.AdminView
+namespace View.ClientView.Templates
 {
     /// <summary>
-    /// Interaction logic for AdminView.xaml
+    /// Interaction logic for ProductTemplate.xaml
     /// </summary>
-    public partial class CustomersListView : UserControl
+    public partial class ProductTemplate : UserControl
     {
-        public CustomersListView()
+        public ProductTemplate()
         {
             InitializeComponent();
         }
