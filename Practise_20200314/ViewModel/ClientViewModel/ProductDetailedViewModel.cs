@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 
 namespace ViewModel.ClientViewModel
@@ -26,9 +27,36 @@ namespace ViewModel.ClientViewModel
             }
         }
 
+        private int totalQuantity;
+        public int TotalQuantity
+        {
+            get
+            {
+                return this.totalQuantity;
+            }
+            set
+            {
+                if (this.totalQuantity == value)
+                    return;
+
+                this.totalQuantity = value;
+                this.OnPropertyChanged(nameof(this.TotalQuantity));
+            }
+        }
+
         public ProductDetailedViewModel(Product product)
         {
             this.Product = product;
+            this.CountTotalQuantity();
+        }
+
+        private void CountTotalQuantity()
+        {
+            int currentId = this.Product.ProductId;
+            this.TotalQuantity = this.Product.Stocks
+                .Where(s => s.ProductId == currentId)
+                .Select(s => s.Quantity)
+                .Sum();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

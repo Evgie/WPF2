@@ -16,7 +16,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--ProductId-->
         <Label VerticalAlignment="Center"
@@ -73,20 +72,6 @@
                  Grid.Row="3"
                  Margin="5"
                  MinWidth="200"
-                 Text="{Binding Path=ModelYear}"/>
-        <!--Quantity-->
-        <Label VerticalAlignment="Center"
-               HorizontalAlignment="Left"
-               Grid.Column="0"
-               Grid.Row="4"
-               Margin="5"
-               Content="Quantity:"/>
-        <TextBox VerticalAlignment="Center"
-                 HorizontalAlignment="Left"
-                 Grid.Column="1"
-                 Grid.Row="4"
-                 Margin="5"
-                 MinWidth="200"
-                 Text="{Binding Path=Stocks.Quantity}"/>
+                 Text="{Binding Path=ModelYear}"/>        
     </Grid>
 </UserControl>
