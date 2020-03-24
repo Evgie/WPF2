@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="View.ClientView.Templates.ProductTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:View.ClientView.Templates"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--ProductId-->
+        <Label VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Grid.Column="0"
+               Grid.Row="0"
+               Margin="5"
+               Content="Product ID:"/>
+        <TextBox VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Grid.Column="1"
+                 Grid.Row="0"
+                 Margin="5"
+                 MinWidth="200"
+                 Text="{Binding Path=ProductId}"/>
+        <!--ProductName-->
+        <Label VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Grid.Column="0"
+               Grid.Row="1"
+               Margin="5"
+               Content="Product Id:"/>
+        <TextBox VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Grid.Column="1"
+                 Grid.Row="1"
+                 Margin="5"
+                 MinWidth="200"
+                 Text="{Binding Path=ProductName}"/>
+        <!--ListPrice-->
+        <Label VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Grid.Column="0"
+               Grid.Row="2"
+               Margin="5"
+               Content="List Price:"/>
+        <TextBox VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Grid.Column="1"
+                 Grid.Row="2"
+                 Margin="5"
+                 MinWidth="200"
+                 Text="{Binding Path=ListPrice}"/>
+        <!--ModelYear-->
+        <Label VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Grid.Column="0"
+               Grid.Row="3"
+               Margin="5"
+               Content="Model Year:"/>
+        <TextBox VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Grid.Column="1"
+                 Grid.Row="3"
+                 Margin="5"
+                 MinWidth="200"
+                 Text="{Binding Path=ModelYear}"/>        
+    </Grid>
+</UserControl>
