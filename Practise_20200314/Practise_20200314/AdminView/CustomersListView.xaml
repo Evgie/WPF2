@@ -5,11 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.AdminView"
              xmlns:adminViewModel="clr-namespace:ViewModel.AdminViewModel;assembly=ViewModel"
+             xmlns:templates="clr-namespace:View.AdminView.Templates"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <adminViewModel:CustomersListViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <DataTemplate x:Key="customersTemplate">
+            <templates:CustomersTemplate/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -23,7 +29,6 @@
         </Grid.RowDefinitions>
 
         <!--Customers List-->
-
         <Label Margin="5"
                Grid.Row="0"
                Grid.Column="0"
@@ -35,7 +40,8 @@
                   Grid.Column="0"
                   Grid.RowSpan="3"
                   ItemsSource="{Binding Path=Customers}"
-                  SelectedItem="{Binding SelectedCustomer}"/>
+                  SelectedItem="{Binding SelectedCustomer}"
+                  ItemTemplate="{StaticResource ResourceKey=customersTemplate}"/>
 
         <!--Orders List-->
         <local:OrdersListView Grid.Column="1"
