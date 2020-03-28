@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Presentation.View.StudentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:view="clr-namespace:Presentation.View"
+             DataContext="{Binding StudentViewModel, Source={StaticResource Locator}}"
+             mc:Ignorable="d"              
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Width" Value="250"/>
+        </Style>
+        <Style TargetType="{x:Type StackPanel}">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <DataTemplate x:Key="studentsTemplate">
+            <view:StudentsDetailedView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--StudentsList-->
+        <Label Content="Students:"
+               Grid.Row="0"
+               Grid.Column="0"/>
+        <ListView ItemsSource="{Binding Students}"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  SelectedItem="{Binding SelectedStudent}"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  Grid.RowSpan="2"
+                  Margin="5"
+                  ItemTemplate="{StaticResource ResourceKey=studentsTemplate}">
+        </ListView>        
+       <!--Button-->
+        <Button Content="Get Students" 
+                Grid.Column="0"
+                Grid.Row="3"
+                Margin="5"
+                Command="{Binding GetStudentsCommmand}" />
+        <Button Content="Remove Student"
+                Grid.Column="0"
+                Grid.Row="4"
+                Margin="5"
+                Command="{Binding RemoveStudentCommmand}"/>
+        <!--Books-->
+        <view:BooksView Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.RowSpan="2"
+                        DataContext="{Binding SelectedStudent}"/>
+        <!--Address-->
+        <view:AdressView Grid.Row="2"
+                         Grid.Column="1"
+                         Grid.RowSpan="2"
+                         DataContext="{Binding SelectedStudent.Address}"/>
+
+    </Grid>
+</UserControl>
