@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using DAL.Model;
 using DAL.Services;
 using Presentation.Extensions;
@@ -14,7 +15,7 @@ namespace Presentation.ViewModel
         private readonly IStudentService studentService;
 
         public StudentViewModel(IStudentService studentService)
-        {
+        {            
             if (studentService == null) throw new ArgumentNullException(nameof(studentService));
 
             this.studentService = studentService;
@@ -22,6 +23,7 @@ namespace Presentation.ViewModel
 
             GetStudentsCommmand = new DelegateCommand.DelegateCommand(ExecuteGetStudents);
             SaveStudentsCommand = new DelegateCommand.DelegateCommand(ExecuteSaveStudents, CanExecuteSaveStudents);
+            RemoveStudentCommmand = new DelegateCommand.DelegateCommand(ExecuteRemoveStudent, CanExecuteRemoveStudent);
         }
 
         private bool CanExecuteSaveStudents()
@@ -31,12 +33,17 @@ namespace Presentation.ViewModel
 
         private void ExecuteSaveStudents()
         {
-            studentService.SaveStudents(Students);
+            studentService.SaveStudents(this.Students);
         }
 
         private void ExecuteGetStudents()
         {
             this.Students = this.studentService.GetStudents().ToObservableCollection();
+        }
+
+        private bool CanExecuteGetStudents()
+        {
+            return !this.Students.Any();
         }
 
         public ObservableCollection<Student> Students
@@ -58,6 +65,20 @@ namespace Presentation.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private void ExecuteRemoveStudent()
+        {
+            this.studentService.RemoveStudent(this.SelectedStudent);
+            this.studentService.SaveStudents(this.Students);
+            this.ExecuteGetStudents();
+        }
+
+        private bool CanExecuteRemoveStudent()
+        {
+            return this.Students.Any();
+        }
+
+        public DelegateCommand.DelegateCommand RemoveStudentCommmand { get; }
 
         public DelegateCommand.DelegateCommand GetStudentsCommmand { get; }
 

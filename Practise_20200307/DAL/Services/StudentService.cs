@@ -10,26 +10,23 @@ namespace DAL.Services
     {
         private StudentsDbContext context;
 
-        private List<Student> studentsRepository_ = new List<Student>
-        {
-            new Student {FirstName = "John Snow", Email = "John.Snow@soaf.com"},
-            new Student {FirstName = "Tyrion Lannister", Email = "Tyrion.Lannister@soaf.com"},
-            new Student {FirstName = "Arya Stark", Email = "Arya.Stark@soaf.com"},
-            new Student {FirstName = "Victarion.Greyjoy", Email = "Victarion.Greyjoy@soaf.com"},
-        };
-
         public StudentService()
         {
-
+            this.context = new StudentsDbContext();
         }
         public IEnumerable<Student> GetStudents()
         {
-            return new List<Student>(this.context.Students.Include(s => s.Address));
+            return new List<Student>(this.context.Students.Include(s => s.Address).Include(s =>s.Books));
         }
 
         public void SaveStudents(IEnumerable<Student> students)
         {
             this.context.SaveChanges();
+        }
+
+        public void RemoveStudent(Student student)
+        {
+            this.context.Remove(student);
         }
 
         private bool disposed = false;

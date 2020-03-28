@@ -16,5 +16,11 @@ namespace DAL.Model
         public ObservableCollection<Book> Books { get; set; }
         public Address Address { get; set; }
         public int AddressId { get; set; }
+
+        public override string ToString()
+        {
+            string result = this.FirstName + " " + this.LastName;
+            return result.ToString();
+        }
     }
 }
